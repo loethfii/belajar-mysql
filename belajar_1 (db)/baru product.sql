@@ -1,3 +1,32 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@loethfii 
+ProgrammerZamanNow
+/
+belajar-mysql-dasar
+Public
+Fork your own copy of ProgrammerZamanNow/belajar-mysql-dasar
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+belajar-mysql-dasar/products.sql
+@khannedy
+khannedy belajar mysql dasar
+Latest commit 98894f1 on Dec 18, 2020
+ History
+ 1 contributor
+399 lines (300 sloc)  7.48 KB
+
 CREATE TABLE products
 (
     id          VARCHAR(10)  NOT NULL,
@@ -347,52 +376,6 @@ select id, name, ifnull(`condition`, 'Baru') as 'Kondisi barang', ifnull(descrip
  
  insert into products (name, `condition`, category, description, price, quantity)
  value ('hemaviton jrenk', 'baru', 'kesehatan', 'menguatkan stamina, menambah nafsu makan', 24000 , 43);
- 
- ALTER TABLE products ADD FULLTEXT(name, description);
-
- 
- select* from products;
- 
- select * from products
- where match(name, description)
-against ('rtx -' in natural language mode);
-
-alter table products
-drop index name;
-
-alter table products
-add fulltext nama_description (name, description);
-
-
-select * from products
-where match(name,description)
-against('-rtx +garansi' in boolean mode);
-
-select * from products
-where match(name,description)
-against('+rtx ~garansi' in boolean mode);
-
-select * from products
-where match(name,description)
-against('galax*' in boolean mode);
-
-insert into products (name,`condition`, category, description, price, quantity)
-value( 'Galaxy A53 ', 'bekas', 'vga card', 'New segel garansi 3 taun samsung', 7000000, 50);
-
-
-select * from products;
-
-
-select * from products
-where match(name,description)
-against('vga card' with query expansion);
-
-
-insert into products (name,`condition`, category, description, price, quantity)
-value( 'Mangan ', 'bekas', 'vga card', 'New segel garansi 3 taun samsung', 20000, 4);
-
-
- 
  
  
  

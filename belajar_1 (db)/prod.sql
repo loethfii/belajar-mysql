@@ -382,14 +382,127 @@ value( 'Galaxy A53 ', 'bekas', 'vga card', 'New segel garansi 3 taun samsung', 7
 
 select * from products;
 
+delete from products
+where id = 13;
 
 select * from products
 where match(name,description)
 against('vga card' with query expansion);
 
-
 insert into products (name,`condition`, category, description, price, quantity)
 value( 'Mangan ', 'bekas', 'vga card', 'New segel garansi 3 taun samsung', 20000, 4);
+
+alter table products
+drop column id_category;
+
+describe products;
+
+show create table products;
+
+ALTER TABLE products 
+DROP constraint fk_products_id_category ;
+
+alter table products
+add column id_category int after description;
+
+alter table products
+drop foreign key id_category;
+
+alter table products
+add constraint fk_products_id_category foreign key (id_category) references categories(id)
+on delete cascade on update cascade;
+
+select * from products;
+
+UPDATE products SET `condition` = 'baru' WHERE id IN (1,2,3,4,5,6,7,8,9,10);
+
+UPDATE products SET id_category = 4 WHERE id IN (1,3);
+UPDATE products SET id_category = 6 WHERE id = 12;
+
+select *
+from products as p
+join categories  as c
+on (p.id_category = c.id);
+
+select p.name, p.condition, c.name as 'category', p.description
+from products as p
+join categories  as c
+on (p.id_category = c.id);
+
+use belajar_1;
+
+select * from products;
+
+alter table products
+modify column `condition` enum('baru','bekas') not null default 'baru';
+
+desc products;
+
+insert into products (name, description, price, quantity)
+value( 'x1 ', 'New segel garansi 3 taun samsung', 7000000, 50);
+
+delete from products
+where id = 16;
+
+select * from categories
+inner join products on (products.id_category = categories.id);
+
+select * from categories
+left join products on (products.id_category = categories.id);
+
+select * from categories
+right join products on (products.id_category = categories.id);
+
+select * from categories
+cross join products on (products.id_category = categories.id);
+
+select * from categories
+cross join products;
+
+
+create table numbers
+(
+	id int not null,
+    primary key (id)
+)engine  =innodb;
+
+insert into numbers (id)
+values (1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
+
+select numbers1.id, numbers2.id, (numbers1.id * numbers2.id)
+from numbers as numbers1
+cross join numbers as numbers2 
+order by numbers1.id desc, numbers2.id desc;
+
+select sum(price) from products;
+select avg(price) from products;
+
+select * from products
+where price > 3331272;
+
+select * from products
+where price > (select avg(price) from products);
+
+update products
+set price = 100000000
+where id = 17;
+
+select name, max(price) as 'Harga tertinggi'
+from products;
+
+select max(price)  from products
+join categories 
+on (products.id_category = categories.id);
+
+select max(cp.price)
+from (select price from products
+join categories 
+on (products.id_category = categories.id)) as cp;
+
+
+
+
+
 
 
  
